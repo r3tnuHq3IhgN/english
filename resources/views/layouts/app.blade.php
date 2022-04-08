@@ -27,15 +27,18 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Football Analysis
                 </a>
-                <a class="navbar-brand" href="{{ url('/english') }}">
+               @if (Auth::check())
+                    <a class="navbar-brand" href="{{ url('/english') }}">
                     English
-                </a>
-                <a class="navbar-brand" href="{{ url('/game') }}">
-                    Game
-                </a>
-                <a class="navbar-brand" href="{{ url('/image') }}">
-                    Image
-                </a>
+                    </a>
+                    <a class="navbar-brand" href="{{ url('/game') }}">
+                        Game
+                    </a>
+                    <a class="navbar-brand" href="{{ url('/image') }}">
+                        Image
+                    </a>
+               @endif
+                </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
