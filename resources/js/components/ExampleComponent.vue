@@ -146,7 +146,7 @@
 
     <!-- toan bo danh sach -->
     <div class="mt-6" v-if="choose == 3">
-      <h2>Tất cả các từ mới</h2>
+      <h2>Tất cả các từ mới (<span style="color: red">{{count_w}}</span>)</h2>
       <select
         class="form-select mb-3"
         aria-label="Default select example"
@@ -374,6 +374,7 @@ export default {
         type: null,
       },
       e_success: null,
+      count_w: null,
     };
   },
   methods: {
@@ -460,7 +461,9 @@ export default {
         })
         .then((res) => {
           this.word2 = res.data;
+          this.count_w = res.data.length;
           //console.log(this.word2);
+          //console.log(this.count_w);
         })
         .catch((err) => {
           console.error(err);

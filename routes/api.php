@@ -21,6 +21,7 @@ Route::post('/word', [WordController::class, 'createWord']);
 Route::get('/get-dates', [WordController::class, 'getDates']);
 Route::get('/get-words-with-date', [WordController::class, 'getWWDate']);
 Route::get('/get-rand-words', [WordController::class, 'getRandWord']);
+Route::get('/get-words-random', [WordController::class, 'getWordsRandom']);
 Route::get('/get-all-words', [WordController::class, 'getAllWords']);
 Route::get('/search-word', [WordController::class, 'searchWord']);
 Route::post('/edit-word', [WordController::class, 'editWord']);

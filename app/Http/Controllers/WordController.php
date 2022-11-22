@@ -86,6 +86,10 @@ class WordController extends Controller
         $count = DB::table('word')->where('user_id', $request->uid)->where('date_created', $request->date)->count();
         return response()->json(['words' => $temp, 'count' => $count]);
     }
+    public function getWordsRandom(Request $request){
+        $temp = DB::table('word')->where('user_id', $request->uid)->inRandomOrder()->take($request->num)->get();
+        return response()->json(['words' => $temp]);
+    }
     public function editWord(Request $request)
     {
         $request->validate(

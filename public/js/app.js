@@ -5641,7 +5641,8 @@ __webpack_require__.r(__webpack_exports__);
         eng: null,
         type: null
       },
-      e_success: null
+      e_success: null,
+      count_w: null
     };
   },
   methods: {
@@ -5725,7 +5726,9 @@ __webpack_require__.r(__webpack_exports__);
           type: type_
         }
       }).then(function (res) {
-        _this4.word2 = res.data; //console.log(this.word2);
+        _this4.word2 = res.data;
+        _this4.count_w = res.data.length; //console.log(this.word2);
+        //console.log(this.count_w);
       })["catch"](function (err) {
         console.error(err);
       });
@@ -5923,6 +5926,111 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {
     this.getDates();
@@ -5932,6 +6040,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      choose: 1,
       dates: null,
       date: null,
       words: null,
@@ -5942,8 +6051,10 @@ __webpack_require__.r(__webpack_exports__);
       num: null,
       next: null,
       result: [],
-      sumary: false,
-      base_url: "/api/get-rand-words"
+      summary: false,
+      base_url: "/api/get-rand-words",
+      num_of_word: [10, 20, 30, 50, 100],
+      num_word: 10
     };
   },
   methods: {
@@ -5969,7 +6080,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.show = false;
       this.next = false;
-      this.sumary = false;
+      this.summary = false;
       this.count = 0;
       this.answer = null;
       this.result = [];
@@ -5981,6 +6092,27 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         _this2.words = res.data.words;
         _this2.num = res.data.count;
+      })["catch"](function (err) {
+        console.error(err);
+      });
+    },
+    getWordsRan: function getWordsRan() {
+      var _this3 = this;
+
+      this.show = false;
+      this.next = false;
+      this.summary = false;
+      this.count = 0;
+      this.answer = null;
+      this.result = [];
+      axios.get("/api/get-words-random", {
+        params: {
+          uid: this.user_id,
+          num: this.num_word
+        }
+      }).then(function (res) {
+        _this3.words = res.data.words;
+        _this3.num = _this3.num_word;
       })["catch"](function (err) {
         console.error(err);
       });
@@ -13254,7 +13386,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.main_w[data-v-3a2c79dd] {\n  border: 1px solid #bababa;\n  border-radius: 15px;\n  width: 200px;\n  height: 50px;\n  text-align: center;\n  vertical-align: super;\n  margin: 0px auto;\n}\n.main_w > span[data-v-3a2c79dd] {\n  margin: 20px;\n}\n.fade-enter-active[data-v-3a2c79dd],\n.fade-leave-active[data-v-3a2c79dd] {\n  transition: opacity 0.5s;\n}\n.fade-enter[data-v-3a2c79dd], .fade-leave-to[data-v-3a2c79dd] /* .fade-leave-active below version 2.1.8 */ {\n  opacity: 0;\n}\n.result_[data-v-3a2c79dd] {\n  width: 100px;\n  margin: 10px auto;\n}\n.wrap_[data-v-3a2c79dd] {\n  display: flex;\n}\n.answer[data-v-3a2c79dd] {\n  text-align: center;\n}\nlabel[data-v-3a2c79dd] {\n  font-weight: bold;\n}\nth[data-v-3a2c79dd],\ntr[data-v-3a2c79dd],\ntd[data-v-3a2c79dd] {\n  text-align: center;\n  vertical-align: middle;\n}\np[data-v-3a2c79dd] {\n  margin-top: 1rem;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.header[data-v-3a2c79dd] {\n  margin-bottom: 20px;\n}\n.main_w[data-v-3a2c79dd] {\n  border: 1px solid #bababa;\n  border-radius: 15px;\n  width: 200px;\n  height: 50px;\n  text-align: center;\n  vertical-align: super;\n  margin: 0px auto;\n}\n.main_w > span[data-v-3a2c79dd] {\n  margin: 20px;\n}\n.fade-enter-active[data-v-3a2c79dd],\n.fade-leave-active[data-v-3a2c79dd] {\n  transition: opacity 0.5s;\n}\n.fade-enter[data-v-3a2c79dd], .fade-leave-to[data-v-3a2c79dd] /* .fade-leave-active below version 2.1.8 */ {\n  opacity: 0;\n}\n.result_[data-v-3a2c79dd] {\n  width: 100px;\n  margin: 10px auto;\n}\n.wrap_[data-v-3a2c79dd] {\n  display: flex;\n}\n.answer[data-v-3a2c79dd] {\n  text-align: center;\n}\nlabel[data-v-3a2c79dd] {\n  font-weight: bold;\n}\nth[data-v-3a2c79dd],\ntr[data-v-3a2c79dd],\ntd[data-v-3a2c79dd] {\n  text-align: center;\n  vertical-align: middle;\n}\np[data-v-3a2c79dd] {\n  margin-top: 1rem;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43297,7 +43429,13 @@ var render = function () {
     _vm._v(" "),
     _vm.choose == 3
       ? _c("div", { staticClass: "mt-6" }, [
-          _c("h2", [_vm._v("Tất cả các từ mới")]),
+          _c("h2", [
+            _vm._v("Tất cả các từ mới ("),
+            _c("span", { staticStyle: { color: "red" } }, [
+              _vm._v(_vm._s(_vm.count_w)),
+            ]),
+            _vm._v(")"),
+          ]),
           _vm._v(" "),
           _c(
             "select",
@@ -43852,232 +43990,574 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _c("h2", [_vm._v("Kiểm tra từ mới theo ngày")]),
+    _c("h2", [_vm._v("Kiểm tra từ mới")]),
     _vm._v(" "),
-    _c("div", { staticClass: "mb-6" }, [
+    _c("div", { staticClass: "header" }, [
       _c(
-        "select",
+        "div",
         {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.date,
-              expression: "date",
-            },
-          ],
-          staticClass: "form-select mb-3",
-          attrs: { "aria-label": "Default select example" },
+          staticClass: "btn btn-primary",
           on: {
-            change: function ($event) {
-              var $$selectedVal = Array.prototype.filter
-                .call($event.target.options, function (o) {
-                  return o.selected
-                })
-                .map(function (o) {
-                  var val = "_value" in o ? o._value : o.value
-                  return val
-                })
-              _vm.date = $event.target.multiple
-                ? $$selectedVal
-                : $$selectedVal[0]
+            click: function ($event) {
+              _vm.choose = 1
             },
           },
         },
-        _vm._l(_vm.dates, function (item, index) {
-          return _c("option", { key: index }, [
-            _vm._v("\n        " + _vm._s(item.date_created) + "\n      "),
-          ])
-        }),
-        0
+        [_vm._v("Theo ngày")]
       ),
       _vm._v(" "),
-      _vm.sumary == false
-        ? _c(
-            "div",
-            {
-              staticClass: "btn btn-primary",
-              on: {
-                click: function ($event) {
-                  return _vm.getWords(_vm.base_url)
-                },
-              },
+      _c(
+        "div",
+        {
+          staticClass: "btn btn-danger",
+          on: {
+            click: function ($event) {
+              _vm.choose = 2
             },
-            [_vm._v("\n      Start\n    ")]
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.sumary == true
-        ? _c(
-            "div",
-            {
-              staticClass: "btn btn-danger",
-              on: {
-                click: function ($event) {
-                  return _vm.getWords(_vm.base_url)
-                },
-              },
-            },
-            [_vm._v("\n      New test\n    ")]
-          )
-        : _vm._e(),
+          },
+        },
+        [_vm._v("Ngẫu nhiên")]
+      ),
     ]),
     _vm._v(" "),
-    _vm.sumary == false
-      ? _c(
-          "div",
-          _vm._l(_vm.words, function (w, index) {
-            return _c("div", { key: index, staticClass: "mt-6" }, [
-              index == _vm.count
-                ? _c("div", [
-                    _c(
-                      "div",
-                      { staticClass: "main_w btn btn-outline-danger d-block" },
-                      [
-                        _c("span", [
-                          _vm._v(_vm._s(w.eng) + " (" + _vm._s(w.type) + ")"),
-                        ]),
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.answer,
-                          expression: "answer",
-                        },
-                      ],
-                      staticClass: "form-control mt-3 w-50 m-auto answer",
-                      attrs: { type: "text", disabled: _vm.next == true },
-                      domProps: { value: _vm.answer },
-                      on: {
-                        input: function ($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.answer = $event.target.value
-                        },
-                      },
-                    }),
-                    _vm._v(" "),
-                    _vm.next != true
-                      ? _c(
-                          "div",
-                          {
-                            staticClass: "btn btn-primary mt-3 result_ d-block",
-                            on: {
-                              click: function ($event) {
-                                return _vm.checkResult(w.eng, w.type, w.vi)
-                              },
-                            },
-                          },
-                          [_vm._v("\n          Kiểm tra\n        ")]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.next == true && _vm.count != _vm.num - 1
-                      ? _c(
-                          "div",
-                          {
-                            staticClass: "btn btn-success mt-3 result_ d-block",
-                            on: { click: _vm.nextQues },
-                          },
-                          [_vm._v("\n          Câu tiếp\n        ")]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.count == _vm.num - 1 && _vm.next == true
-                      ? _c(
-                          "div",
-                          {
-                            staticClass: "btn btn-info mt-3 result_ d-block",
-                            on: {
-                              click: function ($event) {
-                                _vm.sumary = true
-                              },
-                            },
-                          },
-                          [_vm._v("\n          Kết quả\n        ")]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.show == true
-                      ? _c("div", { staticClass: "result_" }, [
-                          _vm.re_ans == true
-                            ? _c(
-                                "div",
-                                { staticClass: "btn btn-success mt-3" },
-                                [_vm._v("True")]
-                              )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.re_ans == false
-                            ? _c(
-                                "div",
-                                { staticClass: "btn btn-danger mt-3" },
-                                [_vm._v("False")]
-                              )
-                            : _vm._e(),
-                        ])
-                      : _vm._e(),
-                  ])
-                : _vm._e(),
-            ])
-          }),
-          0
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _c("br"),
-    _vm._v(" "),
-    _vm.sumary == true
-      ? _c(
-          "table",
-          { staticClass: "table table-bordered table-striped mt-6" },
-          [
-            _vm._m(0),
-            _vm._v(" "),
+    _vm.choose == 1
+      ? _c("div", [
+          _c("div", { staticClass: "mb-6" }, [
             _c(
-              "tbody",
-              _vm._l(_vm.result, function (item, index) {
-                return _c("tr", { key: index }, [
-                  _c("th", { attrs: { scope: "row" } }, [
-                    _vm._v(_vm._s(item[0])),
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("( " + _vm._s(item[1]) + " )")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(item[2]))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(item[3]))]),
-                  _vm._v(" "),
-                  item[4] == false
-                    ? _c("td", [
-                        _c("div", { staticClass: "btn btn-danger" }, [
-                          _vm._v("False"),
-                        ]),
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  item[4] == true
-                    ? _c("td", [
-                        _c("div", { staticClass: "btn btn-success" }, [
-                          _vm._v("True"),
-                        ]),
-                      ])
-                    : _vm._e(),
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.date,
+                    expression: "date",
+                  },
+                ],
+                staticClass: "form-select mb-3",
+                attrs: { "aria-label": "Default select example" },
+                on: {
+                  change: function ($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function (o) {
+                        return o.selected
+                      })
+                      .map(function (o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.date = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  },
+                },
+              },
+              _vm._l(_vm.dates, function (item, index) {
+                return _c("option", { key: index }, [
+                  _vm._v(
+                    "\n          " + _vm._s(item.date_created) + "\n        "
+                  ),
                 ])
               }),
               0
             ),
-          ]
-        )
+            _vm._v(" "),
+            _vm.summary == false
+              ? _c(
+                  "div",
+                  {
+                    staticClass: "btn btn-primary",
+                    on: {
+                      click: function ($event) {
+                        return _vm.getWords(_vm.base_url)
+                      },
+                    },
+                  },
+                  [_vm._v("\n        Start\n      ")]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.summary == true
+              ? _c(
+                  "div",
+                  {
+                    staticClass: "btn btn-danger",
+                    on: {
+                      click: function ($event) {
+                        return _vm.getWords(_vm.base_url)
+                      },
+                    },
+                  },
+                  [_vm._v("\n        New test\n      ")]
+                )
+              : _vm._e(),
+          ]),
+          _vm._v(" "),
+          _vm.summary == false
+            ? _c(
+                "div",
+                _vm._l(_vm.words, function (w, index) {
+                  return _c("div", { key: index, staticClass: "mt-6" }, [
+                    index == _vm.count
+                      ? _c("div", [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "main_w btn btn-outline-danger d-block",
+                            },
+                            [
+                              _c("span", [
+                                _vm._v(
+                                  _vm._s(w.eng) + " (" + _vm._s(w.type) + ")"
+                                ),
+                              ]),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.answer,
+                                expression: "answer",
+                              },
+                            ],
+                            staticClass: "form-control mt-3 w-50 m-auto answer",
+                            attrs: { type: "text", disabled: _vm.next == true },
+                            domProps: { value: _vm.answer },
+                            on: {
+                              keyup: function ($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "enter",
+                                    13,
+                                    $event.key,
+                                    "Enter"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                return _vm.checkResult(w.eng, w.type, w.vi)
+                              },
+                              input: function ($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.answer = $event.target.value
+                              },
+                            },
+                          }),
+                          _vm._v(" "),
+                          _vm.next != true
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "btn btn-primary mt-3 result_ d-block",
+                                  on: {
+                                    click: function ($event) {
+                                      return _vm.checkResult(
+                                        w.eng,
+                                        w.type,
+                                        w.vi
+                                      )
+                                    },
+                                  },
+                                },
+                                [_vm._v("\n            Kiểm tra\n          ")]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.next == true && _vm.count != _vm.num - 1
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "btn btn-success mt-3 result_ d-block",
+                                  on: { click: _vm.nextQues },
+                                },
+                                [_vm._v("\n            Câu tiếp\n          ")]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.count == _vm.num - 1 && _vm.next == true
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "btn btn-info mt-3 result_ d-block",
+                                  on: {
+                                    click: function ($event) {
+                                      _vm.summary = true
+                                    },
+                                  },
+                                },
+                                [_vm._v("\n            Kết quả\n          ")]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.show == true
+                            ? _c("div", { staticClass: "result_" }, [
+                                _vm.re_ans == true
+                                  ? _c(
+                                      "div",
+                                      { staticClass: "btn btn-success mt-3" },
+                                      [_vm._v("True")]
+                                    )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.re_ans == false
+                                  ? _c(
+                                      "div",
+                                      { staticClass: "btn btn-danger mt-3" },
+                                      [_vm._v("False")]
+                                    )
+                                  : _vm._e(),
+                              ])
+                            : _vm._e(),
+                        ])
+                      : _vm._e(),
+                  ])
+                }),
+                0
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _vm.summary == true
+            ? _c(
+                "table",
+                { staticClass: "table table-bordered table-striped mt-6" },
+                [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.result, function (item, index) {
+                      return _c("tr", { key: index }, [
+                        _c("th", { attrs: { scope: "row" } }, [
+                          _vm._v(_vm._s(item[0])),
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("( " + _vm._s(item[1]) + " )")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(item[2]))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(item[3]))]),
+                        _vm._v(" "),
+                        item[4] == false
+                          ? _c("td", [
+                              _c("div", { staticClass: "btn btn-danger" }, [
+                                _vm._v("False"),
+                              ]),
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        item[4] == true
+                          ? _c("td", [
+                              _c("div", { staticClass: "btn btn-success" }, [
+                                _vm._v("True"),
+                              ]),
+                            ])
+                          : _vm._e(),
+                      ])
+                    }),
+                    0
+                  ),
+                ]
+              )
+            : _vm._e(),
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.choose == 2
+      ? _c("div", [
+          _c("div", { staticClass: "mb-6" }, [
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.num_word,
+                    expression: "num_word",
+                  },
+                ],
+                staticClass: "form-select mb-3",
+                attrs: { "aria-label": "Default select example" },
+                on: {
+                  change: function ($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function (o) {
+                        return o.selected
+                      })
+                      .map(function (o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.num_word = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  },
+                },
+              },
+              _vm._l(_vm.num_of_word, function (item, index) {
+                return _c("option", { key: index }, [
+                  _vm._v("\n          " + _vm._s(item) + "\n        "),
+                ])
+              }),
+              0
+            ),
+            _vm._v(" "),
+            _vm.summary == false
+              ? _c(
+                  "div",
+                  {
+                    staticClass: "btn btn-primary",
+                    on: {
+                      click: function ($event) {
+                        return _vm.getWordsRan()
+                      },
+                    },
+                  },
+                  [_vm._v("\n        Start\n      ")]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.summary == true
+              ? _c(
+                  "div",
+                  {
+                    staticClass: "btn btn-danger",
+                    on: {
+                      click: function ($event) {
+                        return _vm.getWordsRan()
+                      },
+                    },
+                  },
+                  [_vm._v("\n        New test\n      ")]
+                )
+              : _vm._e(),
+          ]),
+          _vm._v(" "),
+          _vm.summary == false
+            ? _c(
+                "div",
+                _vm._l(_vm.words, function (w, index) {
+                  return _c("div", { key: index, staticClass: "mt-6" }, [
+                    index == _vm.count
+                      ? _c("div", [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "main_w btn btn-outline-danger d-block",
+                            },
+                            [
+                              _c("span", [
+                                _vm._v(
+                                  _vm._s(w.eng) + " (" + _vm._s(w.type) + ")"
+                                ),
+                              ]),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.answer,
+                                expression: "answer",
+                              },
+                            ],
+                            staticClass: "form-control mt-3 w-50 m-auto answer",
+                            attrs: { type: "text", disabled: _vm.next == true },
+                            domProps: { value: _vm.answer },
+                            on: {
+                              keyup: function ($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "enter",
+                                    13,
+                                    $event.key,
+                                    "Enter"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                return _vm.checkResult(w.eng, w.type, w.vi)
+                              },
+                              input: function ($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.answer = $event.target.value
+                              },
+                            },
+                          }),
+                          _vm._v(" "),
+                          _vm.next != true
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "btn btn-primary mt-3 result_ d-block",
+                                  on: {
+                                    click: function ($event) {
+                                      return _vm.checkResult(
+                                        w.eng,
+                                        w.type,
+                                        w.vi
+                                      )
+                                    },
+                                  },
+                                },
+                                [_vm._v("\n            Kiểm tra\n          ")]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.next == true && _vm.count != _vm.num - 1
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "btn btn-success mt-3 result_ d-block",
+                                  on: { click: _vm.nextQues },
+                                },
+                                [_vm._v("\n            Câu tiếp\n          ")]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.count == _vm.num - 1 && _vm.next == true
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "btn btn-info mt-3 result_ d-block",
+                                  on: {
+                                    click: function ($event) {
+                                      _vm.summary = true
+                                    },
+                                  },
+                                },
+                                [_vm._v("\n            Kết quả\n          ")]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.show == true
+                            ? _c("div", { staticClass: "result_" }, [
+                                _vm.re_ans == true
+                                  ? _c(
+                                      "div",
+                                      { staticClass: "btn btn-success mt-3" },
+                                      [_vm._v("True")]
+                                    )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.re_ans == false
+                                  ? _c(
+                                      "div",
+                                      { staticClass: "btn btn-danger mt-3" },
+                                      [_vm._v("False")]
+                                    )
+                                  : _vm._e(),
+                              ])
+                            : _vm._e(),
+                        ])
+                      : _vm._e(),
+                  ])
+                }),
+                0
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _vm.summary == true
+            ? _c(
+                "table",
+                { staticClass: "table table-bordered table-striped mt-6" },
+                [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.result, function (item, index) {
+                      return _c("tr", { key: index }, [
+                        _c("th", { attrs: { scope: "row" } }, [
+                          _vm._v(_vm._s(item[0])),
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("( " + _vm._s(item[1]) + " )")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(item[2]))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(item[3]))]),
+                        _vm._v(" "),
+                        item[4] == false
+                          ? _c("td", [
+                              _c("div", { staticClass: "btn btn-danger" }, [
+                                _vm._v("False"),
+                              ]),
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        item[4] == true
+                          ? _c("td", [
+                              _c("div", { staticClass: "btn btn-success" }, [
+                                _vm._v("True"),
+                              ]),
+                            ])
+                          : _vm._e(),
+                      ])
+                    }),
+                    0
+                  ),
+                ]
+              )
+            : _vm._e(),
+        ])
       : _vm._e(),
   ])
 }
 var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", { staticClass: "col-md-2", attrs: { scope: "col" } }, [
+          _vm._v("English"),
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "col-md-2", attrs: { scope: "col" } }, [
+          _vm._v("Type"),
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "col-md-3", attrs: { scope: "col" } }, [
+          _vm._v("Vietnamese"),
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "col-md-3", attrs: { scope: "col" } }, [
+          _vm._v("Answer"),
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "col-md-2", attrs: { scope: "col" } }, [
+          _vm._v("Result"),
+        ]),
+      ]),
+    ])
+  },
   function () {
     var _vm = this
     var _h = _vm.$createElement

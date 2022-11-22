@@ -25,20 +25,17 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Football Analysis
+                    Home
                 </a>
-               @if (Auth::check())
+                @if (Auth::check())
                     <a class="navbar-brand" href="{{ url('/english') }}">
-                    English
+                        English
                     </a>
                     <a class="navbar-brand" href="{{ url('/game') }}">
                         Game
                     </a>
-                    <a class="navbar-brand" href="{{ url('/image') }}">
-                        Image
-                    </a>
-               @endif
-                </div>
+
+                @endif
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -78,7 +75,7 @@
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
-                                    </form>
+                                    </form> 
                                 </div>
                             </li>
                         @endguest
