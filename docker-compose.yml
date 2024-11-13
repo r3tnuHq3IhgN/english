@@ -56,6 +56,48 @@ services:
     networks:
       - app-network
 
+    # Elasticsearch Service
+  elasticsearch:
+      image: docker.elastic.co/elasticsearch/elasticsearch:7.17.6
+      container_name: elasticsearch
+      restart: unless-stopped
+      environment:
+        - discovery.type=single-node
+        - ES_JAVA_OPTS=-Xms512m -Xmx512m
+        - ELASTICSEARCH_PASSWORD=elastic_password
+      ports:
+        - "9200:9200"
+        - "9300:9300"
+      volumes:
+        - elasticsearch_data:/usr/share/elasticsearch/data
+      networks:
+        - app-network
+
+    # Kibana Service (optional, if you want to use Kibana for viewing Elasticsearch data)
+  kibana:
+      image: docker.elastic.co/kibana/kibana:7.17.6
+      container_name: kibana
+      restart: unless-stopped
+      ports:
+        - "5601:5601"
+      environment:
+        - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+      networks:
+        - app-network
+
+    # Portainer Service
+  portainer:
+        image: portainer/portainer-ce:latest
+        container_name: portainer
+        restart: unless-stopped
+        ports:
+          - "9000:9000"  # Mở cổng 9000 để truy cập Portainer
+        volumes:
+          - /var/run/docker.sock:/var/run/docker.sock  # Cấp quyền truy cập Docker socket
+          - portainer_data:/data  # Lưu trữ dữ liệu của Portainer
+        networks:
+          - app-network
+
 #Docker Networks
 networks:
   app-network:
@@ -63,4 +105,8 @@ networks:
 #Volumes
 volumes:
   dbdata:
+    driver: local
+  elasticsearch_data:
+    driver: local
+  portainer_data:
     driver: local
