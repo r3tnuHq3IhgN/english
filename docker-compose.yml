@@ -1,0 +1,112 @@
+version: '3'
+services:
+
+  #PHP Service
+  app_ecommerce:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: hunter_php
+    container_name: app
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - app-network
+
+  #Nginx Service 
+  webserver_ecommerce:
+    image: nginx:alpine
+    container_name: webserver
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "88:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - app-network
+
+  #MySQL Service
+  db_ecommerce:
+    image: mysql:8.0
+    container_name: db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3311:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/mysql/my.cnf
+    environment:
+      MYSQL_DATABASE: hunt3r_serve
+      MYSQL_ROOT_PASSWORD: Abcd@1234
+      MYSQL_USER: hunter
+      MYSQL_PASSWORD: H123
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - app-network
+
+    # Elasticsearch Service
+  elasticsearch:
+      image: docker.elastic.co/elasticsearch/elasticsearch:7.17.6
+      container_name: elasticsearch
+      restart: unless-stopped
+      environment:
+        - discovery.type=single-node
+        - ES_JAVA_OPTS=-Xms512m -Xmx512m
+        - ELASTICSEARCH_PASSWORD=elastic_password
+      ports:
+        - "9200:9200"
+        - "9300:9300"
+      volumes:
+        - elasticsearch_data:/usr/share/elasticsearch/data
+      networks:
+        - app-network
+
+    # Kibana Service (optional, if you want to use Kibana for viewing Elasticsearch data)
+  kibana:
+      image: docker.elastic.co/kibana/kibana:7.17.6
+      container_name: kibana
+      restart: unless-stopped
+      ports:
+        - "5601:5601"
+      environment:
+        - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+      networks:
+        - app-network
+
+    # Portainer Service
+  portainer:
+        image: portainer/portainer-ce:latest
+        container_name: portainer
+        restart: unless-stopped
+        ports:
+          - "9000:9000"  # Mở cổng 9000 để truy cập Portainer
+        volumes:
+          - /var/run/docker.sock:/var/run/docker.sock  # Cấp quyền truy cập Docker socket
+          - portainer_data:/data  # Lưu trữ dữ liệu của Portainer
+        networks:
+          - app-network
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
+#Volumes
+volumes:
+  dbdata:
+    driver: local
+  elasticsearch_data:
+    driver: local
+  portainer_data:
+    driver: local

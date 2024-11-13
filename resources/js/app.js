@@ -22,6 +22,12 @@ window.Vue = require('vue').default;
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('side-bar', require('./components/Sidebar.vue').default);
 Vue.component('game', require('./components/Game.vue').default);
+Vue.component('search', require('./components/Search.vue').default);
+
+Vue.component('add-word', require('./components/AddWord.vue').default);
+Vue.component('sort-word', require('./components/SortWord.vue').default);
+Vue.component('all-words', require('./components/AllWords.vue').default);
+Vue.component('edit-word', require('./components/EditWord.vue').default);
 
 
 /**

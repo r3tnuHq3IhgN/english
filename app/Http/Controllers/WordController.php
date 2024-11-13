@@ -2,14 +2,61 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Word;
+use App\Services\ElasticsearchService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Laravel\Ui\Presets\React;
 
 class WordController extends Controller
 {
     //
+    protected $elasticService;
+
+    public function __construct(ElasticsearchService $elasticService)
+    {
+        $this->elasticService = $elasticService;
+    }
+
+
+    public function searchVietnamese(Request $request)
+    {
+        $query = $request->input('query');
+
+        $results = $this->elasticService->searchDataVietnamese($query);
+
+        return response()->json($results);
+    }
+    public function searchEnglish(Request $request)
+    {
+        $query = $request->input('query');
+
+        $results = $this->elasticService->searchDataEnglish($query);
+
+        return response()->json($results);
+    }
+
+    public function searchWordElastic(Request $request)
+    {
+        $query = $request->input('query');
+
+        $results = $this->elasticService->searchData($query);
+
+        return response()->json($results);
+    }
+
+   public function getAllElasticData(Request $request)
+    {
+        $results = $this->elasticService->getAllData();
+
+        return response()->json($results);
+    }
+    public function deleteAllData(Request $request)
+    {
+        $this->elasticService->deleteAllData();
+
+        return response()->json(['message' => 'Data deleted from Elasticsearch']);
+    }
+
     public function createWord(Request $request)
     {
         $request->validate(
@@ -25,12 +72,13 @@ class WordController extends Controller
 
             ]
         );
-        $temp = DB::table('word')->where('user_id', $request->uid)->where('eng', $request->eng)->where('type', $request->type)->first();
-        if ($temp != '') {
+        //$temp = DB::table('word')->where('user_id', $request->uid)->where('eng', $request->eng)->where('type', $request->type)->first();
+        $temp = Word::checkWordExists($request->uid, $request->eng, $request->type);
+        if ($temp != 0) {
             return 'had';
         } else {
             date_default_timezone_set('Asia/Ho_Chi_Minh');
-            DB::table('word')->insert([
+            Word::create([
                 'user_id' => $request->uid,
                 'eng' => $request->eng,
                 'type' => $request->type,
@@ -43,7 +91,8 @@ class WordController extends Controller
     }
     public function getDates(Request $request)
     {
-        $temp = DB::table('word')->where('user_id', $request->uid)->distinct('date_created')->get('date_created');
+        //$temp = DB::table('word')->where('user_id', $request->uid)->distinct('date_created')->get('date_created');
+        $temp = Word::Dates($request->uid);
         return response()->json($temp);
     }
     public function getWWDate(Request $request)
@@ -68,11 +117,13 @@ class WordController extends Controller
     }
     public function searchWord(Request $request)
     {
-        $temp = DB::table('word')->where('user_id', $request->uid)->where('eng', $request->word)->get();
+        //$temp = DB::table('word')->where('user_id', $request->uid)->where('eng', $request->word)->get();
+        $temp = Word::searchWord($request->uid, $request->word);
+        //$temp = Word::searchFulltext($request->uid, $request->word);
         if ($temp != null) {
             return response()->json($temp);
         } else {
-            return 'no';
+           return 'notfound';
         }
     }
     public function deleteWord(Request $request)

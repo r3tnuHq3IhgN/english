@@ -13,7 +13,7 @@
           v-model="date"
         >
           <option v-for="(item, index) in dates" :key="index">
-            {{ item.date_created }}
+            {{ item }}
           </option>
         </select>
         <div
@@ -242,7 +242,7 @@ export default {
         .then((res) => {
           if (res.data != null) {
             this.dates = res.data;
-            this.date = this.dates[this.dates.length - 1]["date_created"];
+            this.date = this.dates[this.dates.length - 1];
           }
           //console.log(res);
         })
