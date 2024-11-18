@@ -30,6 +30,7 @@ Vue.component('all-words', require('./components/AllWords.vue').default);
 Vue.component('edit-word', require('./components/EditWord.vue').default);
 Vue.component('shoe', require('./components/Shoe.vue').default);
 Vue.component('add-shoe', require('./components/AddShoe.vue').default);
+Vue.component('all-shoe', require('./components/AllShoe.vue').default);
 
 
 /**

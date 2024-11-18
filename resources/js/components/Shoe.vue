@@ -1,14 +1,17 @@
 <template>
     <div class="container">
-        <div class="header">
-            <div class="btn btn-primary" @click="choose = 1">Thêm giày mới</div>
-            <div class="btn btn-success" @click="choose = 2">Xem toàn bộ giày</div>
-            <div class="btn btn-danger" @click="choose = 3">Tìm kiếm</div>
-            <div class="btn btn-warning" @click="choose = 4">Chỉnh sửa giày</div>
+        <div class="header row">
+            <div class="btn btn-primary col-sm-2 col-3" @click="choose = 1">Thêm giày mới</div>
+            <div class="btn btn-success col-sm-2 col-3" @click="choose = 2">Xem toàn bộ giày</div>
+            <div class="btn btn-danger col-sm-2 col-3" @click="choose = 3">Tìm kiếm</div>
+            <!-- <div class="btn btn-warning col-sm-2 col-3" @click="choose = 4">Chỉnh sửa giày</div> -->
         </div>
         <add-shoe 
             v-if="choose === 1" 
-            @submit="submitForm"
+            :user_id="user_id"
+        />
+        <all-shoe 
+            v-if="choose === 2" 
             :user_id="user_id"
         />
     </div>
@@ -24,7 +27,7 @@
         },
         data() {
             return {
-                choose: 1,
+                choose: 2,
             };
         },
         methods: {
@@ -44,3 +47,13 @@
     };
 
 </script>
+<style scoped>
+    .header {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .btn {
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+</style>

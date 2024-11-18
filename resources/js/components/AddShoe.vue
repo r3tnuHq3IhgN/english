@@ -2,7 +2,7 @@
   <div class="container">
     <form action="">
       <div class="form-group">
-        <label for="exampleFormControlInput1">Name</label>
+        <label for="exampleFormControlInput1">Name <span id="txt_danger">*</span></label>
         <input
             type="text"
             class="form-control"
@@ -32,7 +32,7 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="exampleFormControlInput1">Size</label>
+        <label for="exampleFormControlInput1">Size <span id="txt_danger">*</span></label>
         <input
             type="text"
             class="form-control"
@@ -47,7 +47,7 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="exampleFormControlInput1">Price</label>
+        <label for="exampleFormControlInput1">Price <span id="txt_danger">*</span></label>
         <input
             type="text"
             class="form-control"
@@ -93,7 +93,7 @@
       </div>
 
       <div class="form-group">
-        <label for="exampleFormControlInput1">Image</label>
+        <label for="exampleFormControlInput1">Image <span id="txt_danger">*</span></label>
         <file-pond
           name="images"
           ref="pond"
@@ -207,29 +207,42 @@ import axios from "axios";
       submitForm() {
         try {
           this.formData.user_id = this.user_id;
-          console.log(this.formData);
-          axios.post("/api/shoe/create", this.formData)
-          .then((res) => {
-            if(res.data) {
-              this.shoe_id = res.data.id;
-              const pond = this.$refs.pond;
-              const files = pond.getFiles();
-              pond.processFiles();
-            }
-            this.success = true;
-            this.fail = false;
-            this.resetForm();
-          })
-          .catch((error) => {
-            this.fail = true;
-            this.success = false;
-            this.errors = error.response.data.errors;
-            for (const key in this.errors) {
-              if (this.errors[key]) {
-                this.errors[key] = this.errors[key][0];
+          const pond = this.$refs.pond;
+          const files = pond.getFiles();
+          if(files.length === 0) {
+            alert('Vui lòng chọn ảnh'); 
+          }
+          else {
+            axios.post("/api/shoe/create", this.formData)
+            .then((res) => {
+              if(res.data) {
+                this.shoe_id = res.data.id;
+                if(this.shoe_id) {
+                  pond.processFiles().then(() => {
+                    this.success = true;
+                    this.fail = false;
+                    this.resetForm();
+                    setTimeout(() => { 
+                      this.success = false; 
+                      this.$refs.pond.removeFiles();
+                    }, 3000);
+                  }).catch((error) => {
+                    console.log('Lỗi khi xử lý file:', error);
+                  });
+                }
               }
-            }
+            })
+            .catch((error) => {
+              this.fail = true;
+              this.success = false;
+              this.errors = error.response.data.errors;
+              for (const key in this.errors) {
+                if (this.errors[key]) {
+                  this.errors[key] = this.errors[key][0];
+                }
+              }
           });
+          }
         } catch (error) {
           console.log(error);
         }
@@ -273,6 +286,10 @@ import axios from "axios";
   }
   a {
     color: #42b983;
+  }
+  #txt_danger {
+    color: red;
+    font-size: bold;
   }
   </style>
   

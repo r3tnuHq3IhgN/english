@@ -26,6 +26,15 @@ class Shoe extends Model
     }
     public function images()
     {
-        return $this->hasMany(Image::class);
+        return $this->hasMany(ShoeImage::class, 'shoe_id', 'id');
+    }
+
+    public function scopeGetAllShoesOfUser($query, $uid)
+    {
+        return $query->where('user_id', $uid)->with('images')->get();
+    }
+    public function scopeFindShoeOfUserWithId($query, $uid, $shoe_id)
+    {
+        return $query->where('user_id', $uid)->where('id', $shoe_id);
     }
 }
