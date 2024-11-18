@@ -35,7 +35,10 @@
                         Game
                     </a>
                     <a class="navbar-brand" href="{{ url('/search') }}">
-                        Search
+                        Search </a>
+                     <a class="navbar-brand" href="{{ url('/shoe') }}">
+                        Shoe
+                    </a>
                     <a class="navbar-brand" href="#">
                         Design by HUNT3R
                     </a>

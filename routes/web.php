@@ -30,6 +30,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/search', function () {
         return view('search');
     });
+    Route::get('/shoe', function () {
+        return view('shoe');
+    });
 });
 
 Route::get('/test', function () {

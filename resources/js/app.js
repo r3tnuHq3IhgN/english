@@ -28,6 +28,8 @@ Vue.component('add-word', require('./components/AddWord.vue').default);
 Vue.component('sort-word', require('./components/SortWord.vue').default);
 Vue.component('all-words', require('./components/AllWords.vue').default);
 Vue.component('edit-word', require('./components/EditWord.vue').default);
+Vue.component('shoe', require('./components/Shoe.vue').default);
+Vue.component('add-shoe', require('./components/AddShoe.vue').default);
 
 
 /**
