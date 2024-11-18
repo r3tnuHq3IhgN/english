@@ -5,6 +5,7 @@ use App\Http\Controllers\WordController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ShoeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,4 +34,9 @@ Route::post('/search-word-with-elastic', [\App\Http\Controllers\WordController::
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::group(['prefix' => 'shoe'], function () {
+    Route::post('/create' , [ShoeController::class , 'create']);
+    Route::post('/create-shoe-images' , [ShoeController::class , 'createShoeImages']);
 });
