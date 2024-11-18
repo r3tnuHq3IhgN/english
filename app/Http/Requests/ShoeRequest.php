@@ -25,11 +25,8 @@ class ShoeRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'brand' => 'required',
             'size' => 'required',
             'price' => 'required|numeric',
-            'description' => 'required',
-            'category' => 'required',
         ];
     }
 
@@ -37,12 +34,9 @@ class ShoeRequest extends FormRequest
     {
         return [
             'name.required' => 'Name is required',
-            'brand.required' => 'Brand is required',
             'size.required' => 'Size is required',
             'price.required' => 'Price is required',
             'price.numeric' => 'Price must be a number',
-            'description.required' => 'Description is required',
-            'category.required' => 'Category is required',
         ];
     }
 }

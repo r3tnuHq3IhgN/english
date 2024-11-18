@@ -43,7 +43,6 @@ export default {
   },
   methods: {
     getAllWords() {
-      console
       this.$emit("getAllWords", this.type_);
     },
   },

@@ -39,4 +39,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['prefix' => 'shoe'], function () {
     Route::post('/create' , [ShoeController::class , 'create']);
     Route::post('/create-shoe-images' , [ShoeController::class , 'createShoeImages']);
+    Route::get('/get-all-shoes' , [ShoeController::class , 'getAllShoes']);
+    Route::delete('/delete-shoe' , [ShoeController::class , 'deleteShoe']);
 });
